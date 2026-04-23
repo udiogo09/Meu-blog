@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perspectiva — Blog de Análises e Tendências</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0f0f0e;
+      --ink-soft: #3a3832;
+      --ink-muted: #7a7770;
+      --cream: #f7f4ef;
+      --cream-dark: #ede9e2;
+      --gold: #b8860b;
+      --gold-light: #d4a017;
+      --rule: #d6d0c6;
+      --white: #ffffff;
+      --ad-bg: #f0ece4;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: slideDown 0.5s ease;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to   { transform: translateY(0);     opacity: 1; }
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    nav { display: flex; gap: 28px; }
+
+    nav a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--gold); }
+
+    /* ─── AD BANNER TOP ─── */
+    .ad-banner {
+      background: var(--ad-bg);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      gap: 12px;
+    }
+
+    .ad-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--ink-muted);
+      border: 1px solid var(--rule);
+      padding: 2px 6px;
+      border-radius: 2px;
+    }
+
+    .ad-slot {
+      background: var(--white);
+      border: 1px dashed var(--rule);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+    }
+
+    .ad-slot.leaderboard { width: 728px; height: 90px; max-width: 100%; }
+    .ad-slot.rectangle   { width: 300px; height: 250px; }
+    .ad-slot.sidebar     { width: 300px; height: 600px; }
+
+    /* ─── HERO ─── */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 64px 32px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.12;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--ink-soft);
+      line-height: 1.8;
+      margin-bottom: 28px;
+      font-weight: 300;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--white);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 14px 28px;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .hero-image {
+      background: var(--ink);
+      border-radius: 4px;
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1a1a18 0%, #2d2b26 50%, #3a3530 100%);
+    }
+
+    .hero-image-label {
+      position: relative;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+    }
+
+    .hero-image-title {
+      position: relative;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    /* ─── DIVIDER ─── */
+    .section-divider {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-divider span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--ink-muted);
+      white-space: nowrap;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* ─── MAIN GRID ─── */
+    .main-layout {
+      max-width: 1200px;
+      margin: 40px auto 0;
+      padding: 0 32px 80px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 56px;
+    }
+
+    /* ─── ARTICLE CARDS ─── */
+    .articles { display: flex; flex-direction: column; gap: 0; }
+
+    .article-card {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 28px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+      animation: fadeUp 0.5s ease both;
+      transition: opacity 0.2s;
+    }
+
+    .article-card:hover { opacity: 0.85; }
+
+    .article-card:nth-child(1) { animation-delay: 0.15s; }
+    .article-card:nth-child(2) { animation-delay: 0.25s; }
+    .article-card:nth-child(3) { animation-delay: 0.35s; }
+    .article-card:nth-child(4) { animation-delay: 0.45s; }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .article-category {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold);
+    }
+
+    .article-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--ink-muted);
+    }
+
+    .article-card h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--ink);
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    .article-card h2:hover { color: var(--gold); transition: color 0.2s; }
+
+    .article-excerpt {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 16px;
+    }
+
+    .read-more {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .read-more:hover { color: var(--gold); border-color: var(--gold); }
+
+    .article-thumb {
+      background: var(--cream-dark);
+      border-radius: 3px;
+      aspect-ratio: 3/2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .thumb-1 { background: linear-gradient(135deg, #1a2a3a, #2a4a6a); }
+    .thumb-2 { background: linear-gradient(135deg, #2a1a0a, #5a3a1a); }
+    .thumb-3 { background: linear-gradient(135deg, #1a2a1a, #2a5a2a); }
+    .thumb-4 { background: linear-gradient(135deg, #2a1a2a, #5a2a5a); }
+
+    .thumb-icon {
+      font-size: 2.5rem;
+      opacity: 0.6;
+    }
+
+    /* ─── IN-FEED AD ─── */
+    .ad-in-feed {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar { display: flex; flex-direction: column; gap: 36px; }
+
+    .sidebar-section h3 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--ink-muted);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-ad {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trending-list { list-style: none; }
+
+    .trending-list li {
+      display: flex;
+      gap: 14px;
+      align-items: start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--cream-dark);
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .trending-list li:hover { opacity: 0.7; }
+
+    .trending-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--cream-dark);
+      line-height: 1;
+      min-width: 32px;
+    }
+
+    .trending-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    .trending-cat {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    /* Newsletter */
+    .newsletter-box {
+      background: var(--ink);
+      border-radius: 4px;
+      padding: 28px 24px;
+    }
+
+    .newsletter-box h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .newsletter-box p {
+      font-size: 0.85rem;
+      color: #a09a90;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .newsletter-input {
+      width: 100%;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 2px;
+      color: var(--white);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      padding: 11px 14px;
+      margin-bottom: 10px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .newsletter-input::placeholder { color: #6a6560; }
+    .newsletter-input:focus { border-color: var(--gold); }
+
+    .newsletter-btn {
+      width: 100%;
+      background: var(--gold);
+      border: none;
+      border-radius: 2px;
+      color: var(--white);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .newsletter-btn:hover { background: var(--gold-light); }
+
+    /* Tags */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--ink-soft);
+      border: 1px solid var(--rule);
+      padding: 5px 10px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tag:hover {
+      background: var(--ink);
+      color: var(--white);
+      border-color: var(--ink);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--ink);
+      color: #7a7470;
+      padding: 48px 32px 32px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+
+    .footer-logo span { color: var(--gold); }
+
+    .footer-desc {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .footer-col h5 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul { list-style: none; }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul li a {
+      color: #7a7470;
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 1px;
+    }
+
+    .footer-bottom a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-image { display: none; }
+      .main-layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .article-card { grid-template-columns: 1fr; }
+      .article-thumb { max-height: 180px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP AD BANNER -->
+  <div class="ad-banner">
+    <span class="ad-label">Publicidade</span>
+    <div class="ad-slot leaderboard">728 × 90 — Google AdSense Leaderboard</div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo">Per<span>·</span>spectiva</a>
+      <nav>
+        <a href="#">Negócios</a>
+        <a href="#">Tecnologia</a>
+        <a href="#">Economia</a>
+        <a href="#">Carreira</a>
+        <a href="#">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <p class="hero-tag">✦ Análises de profundidade</p>
+      <h1>O futuro pertence a quem <em>pensa</em> antes de agir</h1>
+      <p class="hero-desc">Análises aprofundadas sobre negócios, tecnologia e tendências que moldam o mundo. Sem ruído, sem superficialidade.</p>
+      <a href="#" class="btn-primary">Explorar artigos</a>
+    </div>
+    <div class="hero-image">
+      <span class="hero-image-label">✦ Destaque da semana</span>
+      <span class="hero-image-title">Como a inteligência artificial está redefinindo o mercado financeiro global</span>
+    </div>
+  </section>
+
+  <!-- SECTION LABEL -->
+  <div class="section-divider">
+    <span>Últimas publicações</span>
+  </div>
+
+  <!-- MAIN CONTENT + SIDEBAR -->
+  <div class="main-layout">
+
+    <!-- ARTICLES -->
+    <main class="articles">
+
+      <!-- Article 1 -->
+      <article class="article-card">
+        <div>
+          <div class="article-meta">
+            <span class="article-category">Tecnologia</span>
+            <span class="article-date">23 abr 2026</span>
+          </div>
+          <h2>A era dos agentes autônomos: quando a IA começa a tomar decisões sozinha</h2>
+          <p class="article-excerpt">Sistemas de inteligência artificial estão evoluindo de ferramentas passivas para agentes que planejam, executam e aprendem de forma independente. O que isso significa para as empresas que querem se manter relevantes?</p>
+          <a href="#" class="read-more">Continuar lendo →</a>
+        </div>
+        <div class="article-thumb thumb-1">
+          <span class="thumb-icon">🤖</span>
+        </div>
+      </article>
+
+      <!-- Article 2 -->
+      <article class="article-card">
+        <div>
+          <div class="article-meta">
+            <span class="article-category">Economia</span>
+            <span class="article-date">21 abr 2026</span>
+          </div>
+          <h2>Inflação estrutural: por que os juros altos não são mais a única resposta</h2>
+          <p class="article-excerpt">Economistas debatem se o modelo tradicional de controle inflacionário ainda funciona em um cenário de choques de oferta crônicos e transição energética acelerada.</p>
+          <a href="#" class="read-more">Continuar lendo →</a>
+        </div>
+        <div class="article-thumb thumb-2">
+          <span class="thumb-icon">📈</span>
+        </div>
+      </article>
+
+      <!-- IN-FEED AD -->
+      <div class="ad-in-feed">
+        <span class="ad-label">Publicidade</span>
+        <div class="ad-slot rectangle">300 × 250 — In-Feed Ad</div>
+      </div>
+
+      <!-- Article 3 -->
+      <article class="article-card">
+        <div>
+          <div class="article-meta">
+            <span class="article-category">Negócios</span>
+            <span class="article-date">18 abr 2026</span>
+          </div>
+          <h2>Startups brasileiras no radar global: o que mudou após a última janela de investimentos</h2>
+          <p class="article-excerpt">Fundos internacionais voltam a olhar para o Brasil com apetite renovado. Mas os critérios de seleção mudaram — e muitas empresas ainda não perceberam isso.</p>
+          <a href="#" class="read-more">Continuar lendo →</a>
+        </div>
+        <div class="article-thumb thumb-3">
+          <span class="thumb-icon">🌎</span>
+        </div>
+      </article>
+
+      <!-- Article 4 -->
+      <article class="article-card">
+        <div>
+          <div class="article-meta">
+            <span class="article-category">Carreira</span>
+            <span class="article-date">15 abr 2026</span>
+          </div>
+          <h2>Liderança em tempos de incerteza: as habilidades que os CEOs mais buscam em 2026</h2>
+          <p class="article-excerpt">Adaptabilidade, pensamento sistêmico e inteligência emocional avançada — o perfil do profissional de alto impacto mudou profundamente nos últimos dois anos.</p>
+          <a href="#" class="read-more">Continuar lendo →</a>
+        </div>
+        <div class="article-thumb thumb-4">
+          <span class="thumb-icon">💡</span>
+        </div>
+      </article>
+
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <!-- Sidebar Ad Top -->
+      <div class="sidebar-ad">
+        <span class="ad-label">Publicidade</span>
+        <div class="ad-slot rectangle">300 × 250 — Sidebar Ad</div>
+      </div>
+
+      <!-- Trending -->
+      <div class="sidebar-section">
+        <h3>Em alta agora</h3>
+        <ul class="trending-list">
+          <li>
+            <span class="trending-num">01</span>
+            <div>
+              <div class="trending-title">Regulação das big techs: o que esperar dos próximos 12 meses</div>
+              <div class="trending-cat">Tecnologia</div>
+            </div>
+          </li>
+          <li>
+            <span class="trending-num">02</span>
+            <div>
+              <div class="trending-title">Mercado imobiliário resiste às altas dos juros — mas por quanto tempo?</div>
+              <div class="trending-cat">Economia</div>
+            </div>
+          </li>
+          <li>
+            <span class="trending-num">03</span>
+            <div>
+              <div class="trending-title">O novo mapa da logística global após a crise do Mar Vermelho</div>
+              <div class="trending-cat">Negócios</div>
+            </div>
+          </li>
+          <li>
+            <span class="trending-num">04</span>
+            <div>
+              <div class="trending-title">Como construir autoridade online em um nicho saturado</div>
+              <div class="trending-cat">Carreira</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="sidebar-section">
+        <h3>Newsletter semanal</h3>
+        <div class="newsletter-box">
+          <h4>Não perca nada</h4>
+          <p>Curadoria das melhores análises direto no seu e-mail, toda segunda-feira.</p>
+          <input class="newsletter-input" type="email" placeholder="seu@email.com" />
+          <button class="newsletter-btn">Assinar gratuitamente</button>
+        </div>
+      </div>
+
+      <!-- Sidebar Ad Bottom -->
+      <div class="sidebar-ad">
+        <span class="ad-label">Publicidade</span>
+        <div class="ad-slot sidebar">300 × 600 — Half Page Ad</div>
+      </div>
+
+      <!-- Tags -->
+      <div class="sidebar-section">
+        <h3>Tópicos</h3>
+        <div class="tags">
+          <span class="tag">IA</span>
+          <span class="tag">Finanças</span>
+          <span class="tag">Startups</span>
+          <span class="tag">ESG</span>
+          <span class="tag">Liderança</span>
+          <span class="tag">Inovação</span>
+          <span class="tag">Mercados</span>
+          <span class="tag">Carreira</span>
+          <span class="tag">Regulação</span>
+          <span class="tag">Logística</span>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <!-- FOOTER AD -->
+  <div class="ad-banner" style="border-top: 1px solid var(--rule); border-bottom: none;">
+    <span class="ad-label">Publicidade</span>
+    <div class="ad-slot leaderboard">728 × 90 — Footer Leaderboard</div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">Per<span>·</span>spectiva</div>
+          <p class="footer-desc">Análises aprofundadas sobre o que importa no mundo dos negócios, da tecnologia e da economia. Publicado por especialistas, lido por líderes.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Seções</h5>
+          <ul>
+            <li><a href="#">Negócios</a></li>
+            <li><a href="#">Tecnologia</a></li>
+            <li><a href="#">Economia</a></li>
+            <li><a href="#">Carreira</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Institucional</h5>
+          <ul>
+            <li><a href="#">Sobre nós</a></li>
+            <li><a href="#">Anuncie aqui</a></li>
+            <li><a href="#">Política de privacidade</a></li>
+            <li><a href="#">Termos de uso</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contato</h5>
+          <ul>
+            <li><a href="#">Redação</a></li>
+            <li><a href="#">Parcerias</a></li>
+            <li><a href="#">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Perspectiva. Todos os direitos reservados.</span>
+        <span>Feito com cuidado · <a href="#">Política de cookies</a></span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
